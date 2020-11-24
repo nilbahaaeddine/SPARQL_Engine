@@ -143,61 +143,65 @@ public class SPARQLRawParser {
 					}
 				}
 			} else if(whichVar.length() == 2) {
-				if(whichIndex.charAt(2) == 's') {
-					if(whichIndex.charAt(1) == 'p') {//object ops
-						for( Object p : Dictionary.getInstance().getStore(whichIndex).get(objectID).keySet().toArray() ) {
-							for( Object s : Dictionary.getInstance().getStore(whichIndex).get(objectID).get(p) ) {
-								resultPattern.add(whichIndex.charAt(2)  + "\t" + patterns.get(i).getSubjectVar().getName() + "\t" + getIndividual(s) + "\t" + whichIndex.charAt(1) + "\t" + patterns.get(i).getPredicateVar().getName() + "\t" + getIndividual(p));
+				try {
+					if(whichIndex.charAt(2) == 's') {
+						if(whichIndex.charAt(1) == 'p') {//object ops
+							for( Object p : Dictionary.getInstance().getStore(whichIndex).get(objectID).keySet().toArray() ) {
+								for( Object s : Dictionary.getInstance().getStore(whichIndex).get(objectID).get(p) ) {
+									resultPattern.add(whichIndex.charAt(2)  + "\t" + patterns.get(i).getSubjectVar().getName() + "\t" + getIndividual(s) + "\t" + whichIndex.charAt(1) + "\t" + patterns.get(i).getPredicateVar().getName() + "\t" + getIndividual(p));
+								}
 							}
-						}
-					} else if(whichIndex.charAt(1) == 'o') {//property pos
-						for( Object o : Dictionary.getInstance().getStore(whichIndex).get(propertyID).keySet().toArray() ) {
-							for( Object s : Dictionary.getInstance().getStore(whichIndex).get(propertyID).get(o) ) {
-								resultPattern.add(whichIndex.charAt(2)  + "\t" + patterns.get(i).getSubjectVar().getName() + "\t" + getIndividual(s) + "\t" + whichIndex.charAt(1) + "\t" + patterns.get(i).getObjectVar().getName() + "\t" + getIndividual(o));
-							}
-						}
-					}
-				}
-				if(whichIndex.charAt(2) == 'p') {
-					if(whichIndex.charAt(1) == 's') {//object osp
-						for( Object s : Dictionary.getInstance().getStore(whichIndex).get(objectID).keySet().toArray() ) {
-							for( Object p : Dictionary.getInstance().getStore(whichIndex).get(objectID).get(s) ) {
-								resultPattern.add(whichIndex.charAt(2)  + "\t" + patterns.get(i).getPredicateVar().getName() + "\t" + getIndividual(p) + "\t" + whichIndex.charAt(1) + "\t" + patterns.get(i).getSubjectVar().getName() + "\t" + getIndividual(s));
-							}
-						}
-					} else if(whichIndex.charAt(1) == 'o') {//subject sop
-						for( Object o : Dictionary.getInstance().getStore(whichIndex).get(subjectID).keySet().toArray() ) {
-							for( Object p : Dictionary.getInstance().getStore(whichIndex).get(subjectID).get(o) ) {
-								resultPattern.add(whichIndex.charAt(2)  + "\t" + patterns.get(i).getPredicateVar().getName() + "\t" + getIndividual(p) + "\t" + whichIndex.charAt(1) + "\t" + patterns.get(i).getObjectVar().getName() + "\t" + getIndividual(o));
+						} else if(whichIndex.charAt(1) == 'o') {//property pos
+							for( Object o : Dictionary.getInstance().getStore(whichIndex).get(propertyID).keySet().toArray() ) {
+								for( Object s : Dictionary.getInstance().getStore(whichIndex).get(propertyID).get(o) ) {
+									resultPattern.add(whichIndex.charAt(2)  + "\t" + patterns.get(i).getSubjectVar().getName() + "\t" + getIndividual(s) + "\t" + whichIndex.charAt(1) + "\t" + patterns.get(i).getObjectVar().getName() + "\t" + getIndividual(o));
+								}
 							}
 						}
 					}
-				}
-				if(whichIndex.charAt(2) == 'o') {
-					if(whichIndex.charAt(1) == 's') {//property pso
-						for( Object s : Dictionary.getInstance().getStore(whichIndex).get(propertyID).keySet().toArray() ) {
-							for( Object o : Dictionary.getInstance().getStore(whichIndex).get(propertyID).get(s) ) {
-								resultPattern.add(whichIndex.charAt(2)  + "\t" + patterns.get(i).getObjectVar().getName() + "\t" + getIndividual(o) + "\t" + whichIndex.charAt(1) + "\t" + patterns.get(i).getSubjectVar().getName() + "\t" + getIndividual(s));
+					if(whichIndex.charAt(2) == 'p') {
+						if(whichIndex.charAt(1) == 's') {//object osp
+							for( Object s : Dictionary.getInstance().getStore(whichIndex).get(objectID).keySet().toArray() ) {
+								for( Object p : Dictionary.getInstance().getStore(whichIndex).get(objectID).get(s) ) {
+									resultPattern.add(whichIndex.charAt(2)  + "\t" + patterns.get(i).getPredicateVar().getName() + "\t" + getIndividual(p) + "\t" + whichIndex.charAt(1) + "\t" + patterns.get(i).getSubjectVar().getName() + "\t" + getIndividual(s));
+								}
 							}
-						}
-					} else if(whichIndex.charAt(1) == 'p') {//subject spo
-						for( Object p : Dictionary.getInstance().getStore(whichIndex).get(subjectID).keySet().toArray() ) {
-							for( Object o : Dictionary.getInstance().getStore(whichIndex).get(subjectID).get(p) ) {
-								resultPattern.add(whichIndex.charAt(2)  + "\t" + patterns.get(i).getObjectVar().getName() + "\t" + getIndividual(o) + "\t" + whichIndex.charAt(1) + "\t" + patterns.get(i).getPredicateVar().getName() + "\t" + getIndividual(p));
+						} else if(whichIndex.charAt(1) == 'o') {//subject sop
+							for( Object o : Dictionary.getInstance().getStore(whichIndex).get(subjectID).keySet().toArray() ) {
+								for( Object p : Dictionary.getInstance().getStore(whichIndex).get(subjectID).get(o) ) {
+									resultPattern.add(whichIndex.charAt(2)  + "\t" + patterns.get(i).getPredicateVar().getName() + "\t" + getIndividual(p) + "\t" + whichIndex.charAt(1) + "\t" + patterns.get(i).getObjectVar().getName() + "\t" + getIndividual(o));
+								}
 							}
 						}
 					}
+					if(whichIndex.charAt(2) == 'o') {
+						if(whichIndex.charAt(1) == 's') {//property pso
+							for( Object s : Dictionary.getInstance().getStore(whichIndex).get(propertyID).keySet().toArray() ) {
+								for( Object o : Dictionary.getInstance().getStore(whichIndex).get(propertyID).get(s) ) {
+									resultPattern.add(whichIndex.charAt(2)  + "\t" + patterns.get(i).getObjectVar().getName() + "\t" + getIndividual(o) + "\t" + whichIndex.charAt(1) + "\t" + patterns.get(i).getSubjectVar().getName() + "\t" + getIndividual(s));
+								}
+							}
+						} else if(whichIndex.charAt(1) == 'p') {//subject spo
+							for( Object p : Dictionary.getInstance().getStore(whichIndex).get(subjectID).keySet().toArray() ) {
+								for( Object o : Dictionary.getInstance().getStore(whichIndex).get(subjectID).get(p) ) {
+									resultPattern.add(whichIndex.charAt(2)  + "\t" + patterns.get(i).getObjectVar().getName() + "\t" + getIndividual(o) + "\t" + whichIndex.charAt(1) + "\t" + patterns.get(i).getPredicateVar().getName() + "\t" + getIndividual(p));
+								}
+							}
+						}
+					}
+				} catch (Exception e) {
 				}
 			} else {
-				int cpt = 0;
-				for( Object s : Dictionary.getInstance().getStore(whichIndex).keySet().toArray() ) {
-					for( Object p : Dictionary.getInstance().getStore(whichIndex).get(s).keySet().toArray() ) {
-						for( Object o : Dictionary.getInstance().getStore(whichIndex).get(s).get(p) ) {
-							resultPattern.add(whichIndex.charAt(0) + "\t" + patterns.get(i).getSubjectVar().getName() + "\t" + getIndividual(s) + "\t" + whichIndex.charAt(1) + "\t" + patterns.get(i).getPredicateVar().getName() + "\t" + getIndividual(p) + "\t" + whichIndex.charAt(2) + "\t" + patterns.get(i).getObjectVar().getName() + "\t" + getIndividual(o));
-						}
-					}	
+				try {
+					for( Object s : Dictionary.getInstance().getStore(whichIndex).keySet().toArray() ) {
+						for( Object p : Dictionary.getInstance().getStore(whichIndex).get(s).keySet().toArray() ) {
+							for( Object o : Dictionary.getInstance().getStore(whichIndex).get(s).get(p) ) {
+								resultPattern.add(whichIndex.charAt(0) + "\t" + patterns.get(i).getSubjectVar().getName() + "\t" + getIndividual(s) + "\t" + whichIndex.charAt(1) + "\t" + patterns.get(i).getPredicateVar().getName() + "\t" + getIndividual(p) + "\t" + whichIndex.charAt(2) + "\t" + patterns.get(i).getObjectVar().getName() + "\t" + getIndividual(o));
+							}
+						}	
+					}
+				} catch (Exception e) {
 				}
-				System.out.println(cpt);
 			}
 			resultStarQuery.add(resultPattern);	
 		}
@@ -222,27 +226,27 @@ public class SPARQLRawParser {
 	public String getIndexQuery(String varPos) {
 		String index = "";
 		switch(varPos) {
-			case "s":
-				index = "pos";
-				break;
-			case "p":
-				index = "sop";
-				break;
-			case "o":
-				index = "spo";
-				break;
-			case "sp":
-				index = "pos";
-				break;
-			case "so":
-				index = "pos";
-				break;
-			case "ps":
-				index = "spo";
-				break;
-			case "spo":
-				index = "spo";
-				break;
+		case "s":
+			index = "pos";
+			break;
+		case "p":
+			index = "sop";
+			break;
+		case "o":
+			index = "spo";
+			break;
+		case "sp":
+			index = "pos";
+			break;
+		case "so":
+			index = "pos";
+			break;
+		case "ps":
+			index = "spo";
+			break;
+		case "spo":
+			index = "spo";
+			break;
 		}
 		return index;
 	}
