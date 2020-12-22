@@ -381,6 +381,7 @@ public final class Main {
 		// Traiter requete par requete
 		System.out.println("Traitement de " + parsedQueries.size() + " requetes...\n");
 		for (ParsedQuery query : parsedQueries) {
+			//System.out.println(currentQuery+1);
 			start = System.currentTimeMillis();
 			//ParsedQuery pq = sparqlParser.parseQuery(query, null);
 			end = System.currentTimeMillis();
